@@ -1,0 +1,55 @@
+<?php
+
+/**
+* @file
+* Various simpletests.
+*/
+
+class MysimpleTest extends DrupalWebTestCase
+{
+  private $administrator;
+
+  /**
+  * Details about the test.
+  */
+
+  public static function getInfo()
+  {
+  return array(
+    'name' => 'My Simple test',
+    'description' => 'My Simpletest examples.',
+    'group' => 'My Simple test group',
+  );
+  }
+
+
+  /**
+  * Setup tasks for test case.
+  */
+  public function setUp()
+  {
+    parent::setUp(array('mysimple'));
+
+  // Create users for running tests.
+    $this->administrator = $this->drupalCreateUser(array('administer site configuration'));
+  }
+
+
+  public function testMySimple()
+  {
+    $this->drupalGet('mysimple');
+    $this->assertText('This is my simple test example.', 'The content on the page is visible.');
+    $this->assertNoText('Spaghetti', 'The word Spaghetti does not appear on this page.');
+    $this->assertFieldByName('pass', '', 'The password field is visible on this page.');
+  }
+
+  public function testLogin()
+  {
+    $this->drupalLogin($this->administrator);
+    $this->drupalGet('user');
+    $this->assertResponse(200, 'The user can access their profile page.');
+    $this->clickLink('Edit');
+
+
+  }
+}

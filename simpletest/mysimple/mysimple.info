@@ -1,0 +1,5 @@
+name = My Simple
+description = A blank module to use for Simpletest
+core = 7.x
+
+files[] = mysimple.test

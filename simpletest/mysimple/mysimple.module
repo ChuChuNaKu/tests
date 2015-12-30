@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function mysimple_menu() {
+  $items = array();
+
+  $items['mysimple'] = array(
+    'title' => 'My Simple test example',
+    'access callback' => TRUE,
+    'page callback' => 'mysimpletest_example',
+    'type' => MENU_NORMAL_ITEM,
+    'menu' => 'navigation',
+  );
+
+  return $items;
+}
+
+
+function mysimpletest_example() {
+  return t('This is my simple test example. Welcome to Drupal.');
+}
